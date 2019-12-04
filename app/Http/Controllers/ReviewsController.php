@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Book;
+use App\Review;
 use Illuminate\Http\Request;
 
-class GetBookController extends Controller
+class ReviewsController extends Controller
 {
     public function __construct()
     {
@@ -14,34 +14,20 @@ class GetBookController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        //get single book
-        $book = Book::find($id);
-        $like = $book->reviews()->where('like', 1)->count();
-        $review = $book->reviews()->where('user_id', auth()->user()->id)->first();
-        $unLike = $book->reviews()->where('like', 0)->count();
-
-
-        return view('book', compact('book', 'like', 'unLike', 'review'));
+        //
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function downloadBook($id)
+    public function comments(Request $request, $book_id)
     {
-        //Download book
-        $book = Book::find($id);
-        $file = $book->file_name;
-
-        return response()->download($file, $book->title.'.pdf');
+        if($request->ajax())
+        {
+            $reviews = Review::where('book_id', $book_id)->with('user')->orderBy('created_at', 'DESC')->get();
+            return response()->json($reviews);
+        }
     }
 
 
@@ -65,6 +51,15 @@ class GetBookController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'like' => 'required'
+        ]);
+
+
+        $review = new Review();
+        $review->create($request->all());
+
+        return redirect('/book/'.$request->book_id)->with('success', 'Thank You For Your Feedback');
     }
 
     /**
@@ -99,6 +94,11 @@ class GetBookController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $review = Review::find($id);
+        //return $request;
+        $review->update($request->all());
+
+        return redirect('/book/'.$request->book_id)->with('success', 'Thank You For Your Feedback');
     }
 
     /**

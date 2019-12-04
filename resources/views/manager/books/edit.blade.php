@@ -6,16 +6,15 @@
             <div class="page-title-box">
                 <ol class="breadcrumb hide-phone float-right p-0 m-0">
                     <li class="breadcrumb-item">
-                        <a href="#">GP Digital Library</a>
+                        <a href="{{url('/home')}}">BlueCrest E-Library</a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="#">Books</a>
                     </li>
                     <li class="breadcrumb-item active">
-                        Add Books
+                        Edit Books
                     </li>
                 </ol>
-                {{--<h4 class="page-title">Add Users</h4>--}}
             </div>
         </div>
     </div>
@@ -26,7 +25,7 @@
             <div class="card-box">
 
 
-                <h4 class="header-title m-t-0 text-center">Add Books</h4>
+                <h4 class="header-title m-t-0 text-center">Edit Books</h4>
 
                 {!! Form::open(['action' => ['BookController@update', $book->id], 'method' => 'POST', 'enctype' => 'multipart/form-data','files'=>'true']) !!}
                 {{method_field('PUT')}}
@@ -57,23 +56,24 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="category_id">Category</label>
-                                <select onchange="getGroup();" type="text" name="category_id" required class="form-control" id="category_id">
-                                    <option value="{{$book->group->category->id}}">{{$book->group->category->name}}</option>
-                                    @if(count($categories) > 0)
-                                        @foreach($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
-                                        @endforeach
-                                    @endif
+                                <label for="faculty_id">Faculty</label>
+                                <select onchange="getGroup();" type="text" name="faculty_id" required class="form-control" id="faculty_id">
+                                    <option value="{{$book->department->faculty->id}}">{{$book->department->faculty->name}}</option>
+
+                                        @forelse($faculties as $faculty)
+                                            <option value="{{$faculty->id}}">{{$faculty->name}}</option>
+                                        @empty
+                                        @endforelse
+
 
                                 </select>
 
                             </div>
 
                             <div class="form-group">
-                                <label for="gender">Group</label>
-                                <select type="text" name="group_id" required class="form-control" id="group_id">
-                                    <option value="{{$book->group->id}}">{{$book->group->name}}</option>
+                                <label for="department_id">Department</label>
+                                <select type="text" name="department_id" required class="form-control" id="department_id">
+                                    <option value="{{$book->department->id}}">{{$book->department->name}}</option>
                                 </select>
 
                             </div>
@@ -92,7 +92,7 @@
                         </div>
 
                         <div class="form-group text-center m-b-0">
-                            <button class="btn btn-primary waves-effect waves-light" type="submit">
+                            <button class="btn btn-blueCrest waves-effect waves-light" type="submit">
                                 Submit
                             </button>
                             <button type="reset" class="btn btn-secondary waves-effect m-l-5">
@@ -112,27 +112,27 @@
 
     <script>
         function getGroup() {
-            var id = $('#category_id').val();
+            var id = $('#faculty_id').val();
 
             $.ajax({
                 type:"GET",
-                url:"{{url('/category-group/')}}/"+id,
+                url:"{{url('/requestDepartment/')}}/"+id,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                 },
                 cache:false,
                 success:function(data){
                     var len = data.length;
-                    $('#group_id').empty();
+                    $('#department_id').empty();
 
 
-                    $('#group_id').append("<option value={{$book->group->id}}>{{$book->group->name}}</option>");
+                    $('#department_id').append("<option value={{$book->department->id}}>{{$book->department->name}}</option>");
                     for(var i = 0; i < len; i++)
                     {
                         var id = data[i]['id'];
                         var name = data[i]['name'];
 
-                        $('#group_id').append("<option value='"+id+"'>"+name+"</option>");
+                        $('#department_id').append("<option value='"+id+"'>"+name+"</option>");
                     }
                 }
             });

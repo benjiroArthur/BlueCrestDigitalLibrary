@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
+use App\Department;
 use App\Faculty;
 use App\User;
 use Illuminate\Http\Request;
@@ -47,6 +49,24 @@ class HomeController extends Controller
             $user = User::find($user_id);
 
             return view('users.profileUpdate', compact('user'));
+        }
+    }
+
+    public function requestDepartment(Request $request, $id)
+    {
+        if($request->ajax())
+        {
+            $departments = Department::where('faculty_id',$id)->get();
+            return response()->json($departments);
+        }
+    }
+
+    public function requestBooks(Request $request, $id)
+    {
+        if($request->ajax())
+        {
+            $books = Book::where('department_id',$id)->get();
+            return response()->json($books);
         }
     }
 }

@@ -13,7 +13,7 @@
                         @csrf
 
                         <p><span class="mdi mdi-account"></span>  USERNAME</p>
-                        <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }} text-center" name="username" value="{{ $user->username }}" required autofocus>
+                        <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }} text-center" name="username" value="{{ $user->username }}" required autofocus readonly>
 
                         @if ($errors->has('username'))
                             <span class="invalid-feedback" role="alert">

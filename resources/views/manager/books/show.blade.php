@@ -6,7 +6,7 @@
             <div class="page-title-box">
                 <ol class="breadcrumb hide-phone float-right p-0 m-0">
                     <li class="breadcrumb-item">
-                        <a href="#">GP Digital Library</a>
+                        <a href="{{url('/home')}}">BlueCrest E-Library</a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="#">Books</a>
@@ -36,14 +36,14 @@
             <hr>
             <p>Year:   {{$book->year_of_publication}}</p>
             <hr>
-            <p>Category:   {{($book->group->category->name)}}</p>
+            <p>Category:   {{($book->department->faculty->name)}}</p>
             <hr>
 
         </div>
 
         <div class="col-sm-12 col-lg-3">
             <hr>
-            <p>Group:   {{$book->group->name}}</p>
+            <p>Group:   {{$book->department->name}}</p>
             <hr>
             <p>Date Created:   {{($book->created_at)}}</p>
             <hr>

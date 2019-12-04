@@ -51,7 +51,7 @@
                                         <td>{{$book->title}}</td>
                                         <td>{{$book->author}}</td>
                                         <td>{{$book->year_of_publication}}</td>
-                                        <td><img src="{{$book->cover_image}}" class="img-md"></td>
+                                        <td><img src="{{$book->cover_image}}" class="img-lg"></td>
                                         <td>{{$book->department->faculty->name}}</td>
                                         <td>{{$book->department->name}}</td>
                                         <td class="text-white">
