@@ -69,4 +69,17 @@ class HomeController extends Controller
             return response()->json($books);
         }
     }
+
+    public function searchBook(Request $request, $dep, $bTitleAuthor)
+    {
+
+            $books = Book::where('department_id', $dep)
+                ->where(function($query) use ($bTitleAuthor) {
+                    $query->where('title', 'like', '%'.$bTitleAuthor.'%')
+                        ->orWhere('author', 'like', '%'.$bTitleAuthor.'%');
+                })->get();
+
+            return response()->json($books);
+
+    }
 }

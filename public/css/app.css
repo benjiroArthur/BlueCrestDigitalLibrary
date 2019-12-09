@@ -11357,3 +11357,31 @@ h2 {
   color: #09378c;
 }
 
+.searchBox input {
+  border: none;
+  border-bottom: 1px solid #09378c;
+  background: transparent;
+  outline: none;
+  color: #09378c;
+}
+
+.searchBox ::-webkit-input-placeholder {
+  color: #09378c !important;
+}
+
+.searchBox ::-moz-placeholder {
+  color: #09378c !important;
+}
+
+.searchBox :-ms-input-placeholder {
+  color: #09378c !important;
+}
+
+.searchBox ::-ms-input-placeholder {
+  color: #09378c !important;
+}
+
+.searchBox ::placeholder {
+  color: #09378c !important;
+}
+

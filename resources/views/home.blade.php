@@ -47,6 +47,10 @@
 
                 </div>
                 <hr>
+                <input type="text" id="department_ids" value="" hidden="hidden">
+                <div class="row justify-content-end mx-5 searchDiv">
+
+                </div>
                 <div class="row pr-5 pl-5 justify-content-center mt-2 books-div">
 
                 </div>
@@ -86,7 +90,7 @@
                 },
                 cache:false,
                 success:function(data){
-                    var len = data.length;
+                    let len = data.length;
                     if($(".department-div").hasClass("hidden"))
                     {
                         $(".department-div").removeClass("hidden")
@@ -95,10 +99,10 @@
                     $(".department-div").empty();
 
 
-                    for(var i = 0; i < len; i++)
+                    for(let i = 0; i < len; i++)
                     {
-                        var id = data[i]['id'];
-                        var name = data[i]['name'];
+                        let id = data[i]['id'];
+                        let name = data[i]['name'];
 
                         $(".department-div").append('<div class="col-sm-6 col-lg-2">\n' +
                             "                                <a class=\"text-decoration-none\" onclick=\"getBooks("+id+");\" id=\"faculty\" href=\"#\">\n" +
@@ -126,6 +130,7 @@
 
         function getBooks(depId)
         {
+            let dep_id = depId;
             showSpinner(".books-div", '223');
 
             $.ajax({
@@ -136,31 +141,106 @@
                 },
                 cache:false,
                 success:function(data){
-                    var len = data.length;
+                    let len = data.length;
+
 
                     $(".books-div").empty();
-
-
-                    for(var i = 0; i < len; i++)
-                    {
-                        var id = data[i]['id'];
-                        var title = data[i]['title'];
-                        var cover = data[i]['cover_image']
-
-                        $(".books-div").html('<div class="col-sm-12 col-lg-2">\n' +
-                            '                        <a class="text-decoration-none" onclick="showBook(' + id + ');" id="category" href="#">\n' +
-                            '                            <div class="card mt-2 mr-1 text-center text-blueCrest" style="border:1px solid #09378c">\n' +
-                            '                                <div class="card-img">\n' +
-                            '                                    <img class="img-thumbnail" src="'+ cover +'" alt="">\n' +
-                            '                                </div>\n' +
-                            '                                ' +   title + '\n' +
-                            '                            </div>\n' +
-                            '                        </a>\n' +
+                    $('.searchDiv').empty();
+                    // $("#department_ids").attr('value', dep_id);
+                    if(len > 0) {
+                        $('.searchDiv').html('<div style="float: right; display: inline">\n' +
+                            '                        <form action="" class="searchBox" onsubmit="searchBook();">\n' +
+                            '                            <input type="text" name="group" id="groupSearch" value="'+dep_id+'" hidden="hidden">\n' +
+                            '<input type="text" name="titleAuthor" id="searchInput" placeholder="Title/Author">\n'+
+                            '                            <a class="btn btn-blueCrest" onclick="searchBook();"><span class="mdi mdi-search-web"></span></a>\n' +
+                            '                        </form>\n' +
+                            '\n' +
                             '                    </div>');
+
+                        for (let i = 0; i < len; i++) {
+                            let id = data[i]['id'];
+                            let title = data[i]['title'];
+                            let cover = data[i]['cover_image'];
+
+
+                            $(".books-div").html('<div class="col-sm-12 col-lg-2">\n' +
+                                '                        <a class="text-decoration-none" onclick="showBook(' + id + ');" id="category" href="#">\n' +
+                                '                            <div class="card mt-2 mr-1 text-center text-blueCrest" style="border:1px solid #09378c">\n' +
+                                '                                <div class="card-img">\n' +
+                                '                                    <img class="img-thumbnail" src="' + cover + '" alt="">\n' +
+                                '                                </div>\n' +
+                                '                                ' + title + '\n' +
+                                '                            </div>\n' +
+                                '                        </a>\n' +
+                                '                    </div>');
+                        }
                     }
+                    else
+                        {
+                            $('.books-div').html('<p>No Books Found</p>')
+                        }
                 }
             });
         }
 
+
+        function searchBook()
+        {
+            showSpinner(".books-div", '223');
+
+            let groupId = $('#groupSearch').val();
+            let book = $('#searchInput').val();
+
+            //alert(book+" "+groupId);
+
+            $.ajax({
+                type:"GET",
+                url:"{{url('/search-book/')}}/"+ groupId/book,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
+                cache:false,
+                success:function(data){
+                    let len = data.length;
+
+
+                    $(".books-div").empty();
+                    $('.searchDiv').empty();
+                    $('.searchDiv').html('<div style="float: right; display: inline">\n' +
+                        '                        <form action="" class="searchBox">\n' +
+                        '                            <input type="text" name="group" id="groupSearch" value="'+dep_id+'" hidden="hidden">\n' +
+                        '<input type="text" name="titleAuthor" id="searchInput" placeholder="Title/Author">\n'+
+                        '                            <a class="btn btn-blueCrest"  onclick="searchBook();"><span class="mdi mdi-search-web"></span></a>\n' +
+                        '                        </form>\n' +
+                        '\n' +
+                        '                    </div>');
+                    if(len > 0) {
+
+
+                        for (let i = 0; i < len; i++) {
+                            let id = data[i]['id'];
+                            let title = data[i]['title'];
+                            let cover = data[i]['cover_image'];
+
+
+                            $(".books-div").html('<div class="col-sm-12 col-lg-2 col-md-4">\n' +
+                                '                        <a class="text-decoration-none" onclick="showBook(' + id + ');" id="category" href="#">\n' +
+                                '                            <div class="card mt-2 mr-1 text-center text-blueCrest" style="border:1px solid #09378c">\n' +
+                                '                                <div class="card-img">\n' +
+                                '                                    <img class="img-thumbnail" src="' + cover + '" alt="">\n' +
+                                '                                </div>\n' +
+                                '                                ' + title + '\n' +
+                                '                            </div>\n' +
+                                '                        </a>\n' +
+                                '                    </div>');
+                        }
+                    }
+                    else
+                    {
+                        $('.books-div').html('<p>No Books Found</p>')
+                    }
+                }
+            });
+        }
     </script>
 @endsection

@@ -103,6 +103,7 @@
         </div>
         {{--ajax request for comments--}}
         <div class="col-sm-12 col-lg-3 col-md-4">
+            <p class="text-blueCrest">Comments</p>
             <div class="my-3 container" id="comments">
 
             </div>
@@ -293,11 +294,11 @@
                         {
                             var comment = data[i]['comment'];
                             var name = data[i]['user']['name'];
-                            var date = data[i]['created_at'];
+                            var date = data[i]['updated_at'];
                             $('#comments').append('<div class="card mb-2" style="border: 1px solid grey; border-radius: 10px; font-size: x-small">\n' +
                                 '                    <p class="p-2"><b>'+name+'</b></p>\n' +
                                 '                    <div class="text-center" style="font-size: 15px">'+comment+'</div>\n' +
-                                '                    <div class="p-2 text-danger">'+date+'</div>\n' +
+                                '                    <div class="p-2 text-danger">Last Update: '+date+'</div>\n' +
                                 '                </div>');
 
                         }

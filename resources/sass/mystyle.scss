@@ -249,6 +249,18 @@ h2
     color: #09378c;
 }
 
+.searchBox input{
+    border: none;
+    border-bottom: 1px solid #09378c;
+    background: transparent;
+    outline: none;
+    color: #09378c;
+}
+
+.searchBox ::placeholder {
+  color: #09378c !important;
+}
+
 
 
 //::-moz-placeholder{

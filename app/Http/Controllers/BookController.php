@@ -98,10 +98,11 @@ class BookController extends Controller
 
             //upload file
 
-            $pdf_file->storeAs('public/books/', $fileNameToStore);
+            //get file destination
+            $destination = public_path().'/books';
+           $pdf_file->move($destination, $fileNameToStore);
 
-
-
+           //upload file ends
         }
 
 
@@ -207,7 +208,7 @@ class BookController extends Controller
             ]);
 
 
-
+        /*If request comes with a pdf file(the book), process and save file*/
         if($request->hasFile('file_name'))
         {
 
@@ -232,14 +233,18 @@ class BookController extends Controller
 
             //upload file
 
-            $pdf_file->storeAs('public/books/', $fileNameToStore);
+            //get file destination
+            $destination = public_path().'/books';
 
-//return $fileNameToStore;
+            //save file
+            $pdf_file->move($destination, $fileNameToStore);
+
+            //upload file ends
 
         }
 
 
-
+        /*If request comes with a image file(cover image), process and save image*/
         if($request->hasFile('cover_image'))
         {
 
@@ -277,8 +282,9 @@ class BookController extends Controller
 
 
 
-
+        /*get all form request except certain input fields*/
         $bookRequest = $request->except(['cover_image', 'file_name', 'category_id']);
+
         if($request->hasFile('file_name'))
         {
             $bookRequest['file_name'] = $fileNameToStore;
