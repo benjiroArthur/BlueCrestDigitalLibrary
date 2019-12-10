@@ -18,7 +18,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/faculty-department/{id}', 'HomeController@requestDepartment');
 Route::get('/department-books/{id}', 'HomeController@requestBooks');
-Route::get('/search-book/{dep}/{bTitleAuthor}', 'HomeController@searchBooks');
+Route::get('/search-book', 'HomeController@searchBooks');
 
 Route::get('/users/{id}/editProfile', 'UsersController@editProfile')->name('edit-profile');
 Route::get('/users/{id}/changePassword', 'UsersController@changePassword')->name('changePassword');

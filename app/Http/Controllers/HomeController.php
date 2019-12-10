@@ -70,16 +70,22 @@ class HomeController extends Controller
         }
     }
 
-    public function searchBook(Request $request, $dep, $bTitleAuthor)
+    public function searchBook(Request $request)
     {
+        $dep = $request->department;
+        $bTitleAuthor = $request->titleAuthor;
 
-            $books = Book::where('department_id', $dep)
-                ->where(function($query) use ($bTitleAuthor) {
-                    $query->where('title', 'like', '%'.$bTitleAuthor.'%')
-                        ->orWhere('author', 'like', '%'.$bTitleAuthor.'%');
-                })->get();
+            if($request->ajax())
+            {
+                $books = Book::where('department_id', $dep)->where('author', 'LIKE', $bTitleAuthor)->get();
+//                $books = Book::where('department_id', $dep)
+//                    ->where(function($query) use ($bTitleAuthor) {
+//                        $query->where('title', 'like', '%'.$bTitleAuthor.'%')
+//                            ->orWhere('author', 'like', '%'.$bTitleAuthor.'%');
+//                    })->get();
 
-            return response()->json($books);
+                return response()->json($books);
+            }
 
     }
 }

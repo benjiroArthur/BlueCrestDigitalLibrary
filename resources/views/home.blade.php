@@ -150,9 +150,9 @@
                     if(len > 0) {
                         $('.searchDiv').html('<div style="float: right; display: inline">\n' +
                             '                        <form action="" class="searchBox" onsubmit="searchBook();">\n' +
-                            '                            <input type="text" name="group" id="groupSearch" value="'+dep_id+'" hidden="hidden">\n' +
+                            '                            <input type="text" name="department" id="depSearch" value="'+dep_id+'">\n' +
                             '<input type="text" name="titleAuthor" id="searchInput" placeholder="Title/Author">\n'+
-                            '                            <a class="btn btn-blueCrest" onclick="searchBook();"><span class="mdi mdi-search-web"></span></a>\n' +
+                            '                            <button type="submit" href="#" class="btn btn-blueCrest searchForm"><span class="mdi mdi-search-web"></span></button>\n' +
                             '                        </form>\n' +
                             '\n' +
                             '                    </div>');
@@ -186,61 +186,66 @@
 
         function searchBook()
         {
-            showSpinner(".books-div", '223');
+            $('.searchForm').click(function(e)
+            {
+                e.preventDefault();
+                showSpinner(".books-div", '223');
 
-            let groupId = $('#groupSearch').val();
-            let book = $('#searchInput').val();
+                // let depId = $('#depSearch').val();
+                // let book = $('#searchInput').val();
 
-            //alert(book+" "+groupId);
+                //alert(book+" "+groupId);
 
-            $.ajax({
-                type:"GET",
-                url:"{{url('/search-book/')}}/"+ groupId/book,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                },
-                cache:false,
-                success:function(data){
-                    let len = data.length;
-
-
-                    $(".books-div").empty();
-                    $('.searchDiv').empty();
-                    $('.searchDiv').html('<div style="float: right; display: inline">\n' +
-                        '                        <form action="" class="searchBox">\n' +
-                        '                            <input type="text" name="group" id="groupSearch" value="'+dep_id+'" hidden="hidden">\n' +
-                        '<input type="text" name="titleAuthor" id="searchInput" placeholder="Title/Author">\n'+
-                        '                            <a class="btn btn-blueCrest"  onclick="searchBook();"><span class="mdi mdi-search-web"></span></a>\n' +
-                        '                        </form>\n' +
-                        '\n' +
-                        '                    </div>');
-                    if(len > 0) {
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('/search-book')}}",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                    cache:false,
+                    success:function(data){
+                        let len = data.length;
 
 
-                        for (let i = 0; i < len; i++) {
-                            let id = data[i]['id'];
-                            let title = data[i]['title'];
-                            let cover = data[i]['cover_image'];
+                        $(".books-div").empty();
+                        $('.searchDiv').empty();
+                        $('.searchDiv').html('<div style="float: right; display: inline">\n' +
+                            '                        <form action="" class="searchBox" onsubmit="searchBook();">\n' +
+                            '                            <input type="text" name="department" id="groupSearch" value="'+depId+'">\n' +
+                            '                            <input type="text" name="titleAuthor" id="searchInput" placeholder="Title/Author">\n'+
+                            '                            <button type="submit" class="btn btn-blueCrest searchForm"><span class="mdi mdi-search-web"></span></button>\n' +
+                            '                        </form>\n' +
+                            '\n' +
+                            '                    </div>');
+                        if(len > 0) {
 
 
-                            $(".books-div").html('<div class="col-sm-12 col-lg-2 col-md-4">\n' +
-                                '                        <a class="text-decoration-none" onclick="showBook(' + id + ');" id="category" href="#">\n' +
-                                '                            <div class="card mt-2 mr-1 text-center text-blueCrest" style="border:1px solid #09378c">\n' +
-                                '                                <div class="card-img">\n' +
-                                '                                    <img class="img-thumbnail" src="' + cover + '" alt="">\n' +
-                                '                                </div>\n' +
-                                '                                ' + title + '\n' +
-                                '                            </div>\n' +
-                                '                        </a>\n' +
-                                '                    </div>');
+                            for (let i = 0; i < len; i++) {
+                                let id = data[i]['id'];
+                                let title = data[i]['title'];
+                                let cover = data[i]['cover_image'];
+
+
+                                $(".books-div").html('<div class="col-sm-12 col-lg-2 col-md-4">\n' +
+                                    '                        <a class="text-decoration-none" onclick="showBook(' + id + ');" id="category" href="#">\n' +
+                                    '                            <div class="card mt-2 mr-1 text-center text-blueCrest" style="border:1px solid #09378c">\n' +
+                                    '                                <div class="card-img">\n' +
+                                    '                                    <img class="img-thumbnail" src="' + cover + '" alt="">\n' +
+                                    '                                </div>\n' +
+                                    '                                ' + title + '\n' +
+                                    '                            </div>\n' +
+                                    '                        </a>\n' +
+                                    '                    </div>');
+                            }
+                        }
+                        else
+                        {
+                            $('.books-div').html('<p>No Books Found</p>')
                         }
                     }
-                    else
-                    {
-                        $('.books-div').html('<p>No Books Found</p>')
-                    }
-                }
+                });
             });
+
         }
     </script>
 @endsection
