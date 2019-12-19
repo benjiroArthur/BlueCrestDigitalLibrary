@@ -190,7 +190,7 @@
             {
                 e.preventDefault();
                 showSpinner(".books-div", '223');
-
+                  let data = $('.searchBox').serialize();
                 // let depId = $('#depSearch').val();
                 // let book = $('#searchInput').val();
 
@@ -199,6 +199,7 @@
                 $.ajax({
                     type:"GET",
                     url:"{{url('/search-book')}}",
+                    data:data,
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                     },
