@@ -40,8 +40,11 @@ class GetBookController extends Controller
         //Download book
         $book = Book::find($id);
         $file = $book->file_name;
+          return response()->file($file, [
+            'Content-Disposition' => str_replace('%name', $book->title, "inline; filename=\"%name\"; filename*=utf-8''%name")
+          ]);
 
-        return response()->download($file, $book->title.'.pdf');
+        //return response()->download($file, $book->title.'.pdf');
     }
 
 
