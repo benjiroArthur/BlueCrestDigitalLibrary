@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <a class="btn btn-success mx-2" href="{{route('download-book',[$book->id])}}"><span class="mdi mdi-download"></span> Download</a>
+                <a class="btn btn-success mx-2" href="{{route('download-book',[$book->id])}}"><span class="mdi mdi-book-open"></span> Open</a>
                 @if($review)
 
                     @if($review->like == true)

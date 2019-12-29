@@ -179,7 +179,7 @@
                     }
                     else
                         {
-                            $('.books-div').html('<p>No Books Found</p>')
+                            $('.books-div').html('<p class="text-blueCrest">No Books Found</p>')
                         }
                 }
             });
@@ -238,7 +238,7 @@
                         }
                         else
                         {
-                            $('.books-div').append('<p>No Books Found</p>')
+                            $('.books-div').append('<p class="text-blueCrest">No Books Found</p>')
                         }
                     }
                 });
