@@ -38,10 +38,17 @@ class GetBookController extends Controller
     public function downloadBook($id)
     {
         //Download book
+
         $book = Book::find($id);
         $file = $book->file_name;
+        $headers = [
+            'content-type' => 'application/pdf',
+            'Content-disposition' => 'inline; filename='.$book->title.'.pdf'
+        ];
+          return response()->file($file, $headers);
 
-        return response()->download($file, $book->title.'.pdf');
+
+        //return response()->download($file, $book->title.'.pdf');
     }
 
 

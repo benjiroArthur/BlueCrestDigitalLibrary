@@ -27,7 +27,7 @@
 
                         @forelse($faculties as $faculty)
                             <div class="col-sm-6 col-lg-2">
-                                <a class="text-decoration-none" onclick="getDepartment({{$faculty->id}});" id="faculty" href="#">
+                                <a class="text-decoration-none" onclick="getDepartment({{$faculty->id}});" id="faculty" href="#dep-div">
                                     <div class="card mt-2 mr-1 text-center text-blueCrest" style="border:1px solid #09378c">
                                         <div class="card-img">
                                             <img class="img-thumbnail" src="{{$faculty->cover_image}}" alt="">
@@ -41,17 +41,24 @@
 
                 </div>
 
-                <div class="row pr-5 pl-5 justify-content-center mt-2 department-div">
+                <div class="row pr-5 pl-5 justify-content-center mt-2 department-div" id="dep-div">
 
 
 
                 </div>
                 <hr>
-                <input type="text" id="department_ids" value="" hidden="hidden">
-                <div class="row justify-content-end mx-5 searchDiv">
+
+                <div class="row justify-content-end mx-5 searchDiv" style="visibility:hidden">
+                  <div style="float: right; display: inline">
+                            <form action="#" class="searchBox">
+                                <input type="text" name="department" id="depSearch" value="" hidden="hidden">
+                                <input type="text" name="titleAuthor" id="searchInput" placeholder="Title/Author">
+                                <button type="button" href="#book-div" onclick="return searchBook();" class="btn btn-blueCrest searchForm"><span class="mdi mdi-search-web"></span></button>
+                           </form>
 
                 </div>
-                <div class="row pr-5 pl-5 justify-content-center mt-2 books-div">
+                </div>
+                <div class="row pr-5 pl-5 justify-content-center mt-2 books-div" id="book-div">
 
                 </div>
 
@@ -105,7 +112,7 @@
                         let name = data[i]['name'];
 
                         $(".department-div").append('<div class="col-sm-6 col-lg-2">\n' +
-                            "                                <a class=\"text-decoration-none\" onclick=\"getBooks("+id+");\" id=\"faculty\" href=\"#\">\n" +
+                            "                                <a class=\"text-decoration-none\" onclick=\"getBooks("+id+");\" id=\"faculty\" href=\"#book-div\">\n" +
                             "                                    <div class=\"card mt-2 mr-1 text-center text-blueCrest\" style=\"border:1px solid #09378c\">\n" +
                             "                                        <div class=\"card-img\">\n" +
                             "                                            <span class=\"mdi mdi-book-multiple\"></span>\n" +
@@ -145,17 +152,12 @@
 
 
                     $(".books-div").empty();
-                    $('.searchDiv').empty();
+                    //$('.searchDiv').empty();
                     // $("#department_ids").attr('value', dep_id);
                     if(len > 0) {
-                        $('.searchDiv').html('<div style="float: right; display: inline">\n' +
-                            '                        <form action="" class="searchBox" onsubmit="searchBook();">\n' +
-                            '                            <input type="text" name="department" id="depSearch" value="'+dep_id+'">\n' +
-                            '<input type="text" name="titleAuthor" id="searchInput" placeholder="Title/Author">\n'+
-                            '                            <button type="submit" href="#" class="btn btn-blueCrest searchForm"><span class="mdi mdi-search-web"></span></button>\n' +
-                            '                        </form>\n' +
-                            '\n' +
-                            '                    </div>');
+                        $('.searchDiv').css('visibility', 'visible');
+                        $('#depSearch').val(depId);
+
 
                         for (let i = 0; i < len; i++) {
                             let id = data[i]['id'];
@@ -163,7 +165,7 @@
                             let cover = data[i]['cover_image'];
 
 
-                            $(".books-div").html('<div class="col-sm-12 col-lg-2">\n' +
+                            $(".books-div").append('<div class="col-sm-12 col-lg-2">\n' +
                                 '                        <a class="text-decoration-none" onclick="showBook(' + id + ');" id="category" href="#">\n' +
                                 '                            <div class="card mt-2 mr-1 text-center text-blueCrest" style="border:1px solid #09378c">\n' +
                                 '                                <div class="card-img">\n' +
@@ -177,7 +179,7 @@
                     }
                     else
                         {
-                            $('.books-div').html('<p>No Books Found</p>')
+                            $('.books-div').html('<p class="text-blueCrest">No Books Found</p>')
                         }
                 }
             });
@@ -186,15 +188,15 @@
 
         function searchBook()
         {
-            $('.searchForm').click(function(e)
-            {
-                e.preventDefault();
-                showSpinner(".books-div", '223');
-                  let data = $('.searchBox').serialize();
-                // let depId = $('#depSearch').val();
-                // let book = $('#searchInput').val();
 
-                //alert(book+" "+groupId);
+                //e.preventDefault();
+                $('.searchDiv').css('visibility', 'hidden');
+                showSpinner(".books-div", '223');
+                let data = $('.searchBox').serialize();
+                let depId = $('#depSearch').val();
+                 // let book = $('#searchInput').val();
+
+                //alert(depId);
 
                 $.ajax({
                     type:"GET",
@@ -208,26 +210,21 @@
                         let len = data.length;
 
 
+
                         $(".books-div").empty();
-                        $('.searchDiv').empty();
-                        $('.searchDiv').html('<div style="float: right; display: inline">\n' +
-                            '                        <form action="" class="searchBox" onsubmit="searchBook();">\n' +
-                            '                            <input type="text" name="department" id="groupSearch" value="'+depId+'">\n' +
-                            '                            <input type="text" name="titleAuthor" id="searchInput" placeholder="Title/Author">\n'+
-                            '                            <button type="submit" class="btn btn-blueCrest searchForm"><span class="mdi mdi-search-web"></span></button>\n' +
-                            '                        </form>\n' +
-                            '\n' +
-                            '                    </div>');
+                      //  $('.searchDiv').empty();
+
                         if(len > 0) {
 
-
+                          $('.searchDiv').css('visibility', 'visible');
+                          $('#depSearch').val(depId);
                             for (let i = 0; i < len; i++) {
                                 let id = data[i]['id'];
                                 let title = data[i]['title'];
                                 let cover = data[i]['cover_image'];
 
 
-                                $(".books-div").html('<div class="col-sm-12 col-lg-2 col-md-4">\n' +
+                                $(".books-div").append('<div class="col-sm-12 col-lg-2 col-md-4">\n' +
                                     '                        <a class="text-decoration-none" onclick="showBook(' + id + ');" id="category" href="#">\n' +
                                     '                            <div class="card mt-2 mr-1 text-center text-blueCrest" style="border:1px solid #09378c">\n' +
                                     '                                <div class="card-img">\n' +
@@ -241,11 +238,11 @@
                         }
                         else
                         {
-                            $('.books-div').html('<p>No Books Found</p>')
+                            $('.books-div').append('<p class="text-blueCrest">No Books Found</p>')
                         }
                     }
                 });
-            });
+
 
         }
     </script>
