@@ -10,7 +10,7 @@ class Review extends Model
     //
     protected $fillable = ['user_id', 'book_id', 'comment', 'like'];
 
-    protected $casts = ['like' => 'boolean'];
+    //protected $casts = ['like' => 'boolean'];
 
 
     //relationships

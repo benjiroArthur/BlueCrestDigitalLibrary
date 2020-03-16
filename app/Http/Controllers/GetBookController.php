@@ -17,16 +17,20 @@ class GetBookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        //get single book
-        $book = Book::find($id);
-        $like = $book->reviews()->where('like', 1)->count();
-        $review = $book->reviews()->where('user_id', auth()->user()->id)->first();
-        $unLike = $book->reviews()->where('like', 0)->count();
 
+    }
+ /**
+     * Display a listing of the resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getbook($id)
+    {
 
-        return view('book', compact('book', 'like', 'unLike', 'review'));
+        return view('book');
     }
 
     /**
@@ -82,7 +86,8 @@ class GetBookController extends Controller
      */
     public function show($id)
     {
-        //
+        $book = Book::find($id);
+        return response()->json($book);
     }
 
     /**
@@ -93,7 +98,22 @@ class GetBookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book = Book::find($id);
+        $faculty = $book->department->faculty->name;
+        $department = $book->department->name;
+        $like = $book->reviews()->where('like', 1)->count();
+        $review = $book->reviews()->where('user_id', auth()->user()->id)->first();
+        $unLike = $book->reviews()->where('like', 0)->count();
+
+        $data = [
+            'faculty' => $faculty,
+            'department' => $department,
+            'likes' => $like,
+            'unlikes' => $unLike,
+            'review' => $review
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -117,5 +137,16 @@ class GetBookController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function openBook($id)
+    {
+        //Open book
+
+        $book = Book::find($id);
+        $file = $book->file_name;
+        $file = asset('books/'.$file);
+       return view('openBook', compact('file'));
+
     }
 }

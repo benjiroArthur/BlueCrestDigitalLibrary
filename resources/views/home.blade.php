@@ -51,7 +51,7 @@
                 <div class="row justify-content-end mx-5 searchDiv" style="visibility:hidden">
                   <div style="float: right; display: inline">
                             <form action="#" class="searchBox">
-                                <input type="text" name="department" id="depSearch" value="">
+                                <input type="text" name="department" id="depSearch" value="" hidden="hidden">
                                 <input type="text" name="titleAuthor" id="searchInput" placeholder="Title/Author">
                                 <button type="button" href="#book-div" onclick="return searchBook();" class="btn btn-blueCrest searchForm"><span class="mdi mdi-search-web"></span></button>
                            </form>

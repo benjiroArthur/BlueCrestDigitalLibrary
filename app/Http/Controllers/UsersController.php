@@ -41,7 +41,7 @@ class UsersController extends Controller
         if($request->ajax())
         {
             //return all users
-            $users = User::paginate(3);
+            $users = User::paginate(10);
 
             return view('manager.users.paginateIndex', compact('users'))->render();
         }

@@ -25,6 +25,10 @@
     },
     "dependencies": {
         "laravel-echo": "^1.6.1",
-        "pusher-js": "^5.0.3"
+        "moment": "^2.24.0",
+        "pdfjs": "^2.3.5",
+        "pusher-js": "^5.0.3",
+        "vform": "^1.0.1",
+        "vue-router": "^3.1.3"
     }
 }

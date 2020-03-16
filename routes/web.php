@@ -34,7 +34,9 @@ Route::resource('/users', 'UsersController');
 Route::get('/user-template', 'UsersController@excelTemplate')->name('excelTemplate');
 Route::get('/users/paginate', 'UsersController@paginateIndex')->name('paginateIndex');
 
-Route::get('/get-book/{id}', 'GetBookController@index');
+Route::resource('/fetch-book', 'GetBookController');
+Route::get('/get-book/{id}', 'GetBookController@getbook');
 Route::get('/download-book/{id}', 'GetBookController@downloadBook')->name('download-book');
+Route::get('/open-book/{id}', 'GetBookController@openBook')->name('open-book');
 Route::resource('/book/review', 'ReviewsController');
 Route::get('/book/comments/{book_id}', 'ReviewsController@comments')->name('comment');

@@ -59,7 +59,7 @@ class ReviewsController extends Controller
         $review = new Review();
         $review->create($request->all());
 
-        return redirect('/get-book/'.$request->book_id)->with('success', 'Thank You For Your Feedback');
+        return response('success');
     }
 
     /**
@@ -95,10 +95,10 @@ class ReviewsController extends Controller
     {
         //
         $review = Review::find($id);
-        //return $request;
+
         $review->update($request->all());
 
-        return redirect('/get-book/'.$request->book_id)->with('success', 'Thank You For Your Feedback');
+        return response('success');
     }
 
     /**

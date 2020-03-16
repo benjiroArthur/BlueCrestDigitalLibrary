@@ -33,7 +33,14 @@ class Book extends Model
     {
 
         return public_path().'/books/'.$value;
+
     }
+//    public function getYearOfPublicationAttribute($value)
+//    {
+//
+//        return diffForHumans($value);
+//    }
+
     //relationship
     public function reviews()
     {
