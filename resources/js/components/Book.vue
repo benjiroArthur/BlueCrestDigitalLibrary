@@ -105,7 +105,7 @@
 
                 <form @submit.prevent="postComment" ref="newForm">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Review This Book</h5>
+                    <h5 class="modal-title" id="reviewModalLabel">Review This Book</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -148,7 +148,7 @@
 
                     <form @submit.prevent="editComment" ref="editForm">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Review This Book</h5>
+                        <h5 class="modal-title" id="likeModalLabel">Review This Book</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
