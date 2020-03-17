@@ -8,9 +8,13 @@ require('./bootstrap');
 
 import * as pdfjs from 'pdfjs';
 
+
+
 window.Vue = require('vue');
 
 import {Form, HasError, AlertError} from 'vform';
+
+Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 
 
 window.Form = Form;
@@ -67,5 +71,15 @@ const router = new VueRouter({
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    created(){
+
+    }
 });
+
+
+/*var channel = Echo.channel('my-channel');
+channel.listen('.my-event', function(data) {
+    alert(JSON.stringify(data));
+});*/
+

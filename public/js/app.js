@@ -2329,11 +2329,13 @@ __webpack_require__.r(__webpack_exports__);
       comment: '',
       newForm: new Form({
         book_id: '',
+        user_id: this.$userId,
         like: '',
         comment: ''
       }),
       editForm: new Form({
         book_id: '',
+        user_id: this.$userId,
         like: '',
         comment: ''
       })
@@ -2373,6 +2375,7 @@ __webpack_require__.r(__webpack_exports__);
         $('#createReviewModal').modal('hide');
 
         if (response.data === 'success') {
+          //this.comments.push(this.newForm);
           Fire.$emit('profileUpdate');
         }
       })["catch"](function (error) {
@@ -2418,6 +2421,10 @@ __webpack_require__.r(__webpack_exports__);
       _this4.getdata();
 
       _this4.getComment();
+    });
+    var channel = Echo.channel('Review.' + this.bookId);
+    channel.listen('.BroadcastComment', function (data) {
+      this.getComment();
     });
   }
 });
@@ -96747,7 +96754,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "modal-header" }, [
       _c(
         "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        { staticClass: "modal-title", attrs: { id: "reviewModalLabel" } },
         [_vm._v("Review This Book")]
       ),
       _vm._v(" "),
@@ -96818,7 +96825,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "modal-header" }, [
       _c(
         "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        { staticClass: "modal-title", attrs: { id: "likeModalLabel" } },
         [_vm._v("Review This Book")]
       ),
       _vm._v(" "),
@@ -111984,6 +111991,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
+Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 window.Form = vform__WEBPACK_IMPORTED_MODULE_1__["Form"];
 Vue.component(vform__WEBPACK_IMPORTED_MODULE_1__["HasError"].name, vform__WEBPACK_IMPORTED_MODULE_1__["HasError"]);
 Vue.component(vform__WEBPACK_IMPORTED_MODULE_1__["AlertError"].name, vform__WEBPACK_IMPORTED_MODULE_1__["AlertError"]);
@@ -112030,8 +112038,13 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
 });
 var app = new Vue({
   el: '#app',
-  router: router
+  router: router,
+  created: function created() {}
 });
+/*var channel = Echo.channel('my-channel');
+channel.listen('.my-event', function(data) {
+    alert(JSON.stringify(data));
+});*/
 
 /***/ }),
 

@@ -200,12 +200,14 @@
                 comment:'',
                 newForm: new Form({
                     book_id: '',
+                    user_id: this.$userId,
                     like: '',
                     comment: '',
                 }),
 
                 editForm: new Form({
                     book_id: '',
+                    user_id: this.$userId,
                     like: '',
                     comment: '',
                 }),
@@ -248,6 +250,7 @@
                     .then((response) => {
                         $('#createReviewModal').modal('hide');
                        if(response.data === 'success'){
+                           //this.comments.push(this.newForm);
                            Fire.$emit('profileUpdate');
                        }
 
@@ -304,6 +307,12 @@
                 this.getdata();
                 this.getComment();
             });
+
+                    let channel = Echo.channel('Review.'+this.bookId);
+                        channel.listen('.BroadcastComment', function(data) {
+                            this.getComment();
+                        });
+
 
         }
     }

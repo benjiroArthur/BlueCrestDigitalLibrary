@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BroadcastComment;
 use App\Review;
 use Illuminate\Http\Request;
 
@@ -45,8 +46,9 @@ class ReviewsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -55,9 +57,10 @@ class ReviewsController extends Controller
             'like' => 'required'
         ]);
 
-
         $review = new Review();
+
         $review->create($request->all());
+        broadcast(new BroadcastComment($review))->toOthers();
 
         return response('success');
     }
