@@ -1,7 +1,9 @@
 @extends('layouts.app')
+@section('meta')
+    <meta name="bookId" content="{{$book->id}}">
+@endsection
 @section('content')
     <!-- Page-Title -->
-    <meta name="" content="">
     <div class="row mb-2">
         <div class="col-sm-12">
             <div class="page-title-box">
@@ -22,8 +24,8 @@
     </div>
     <!-- end page title end breadcrumb -->
 
-    <router-view>
+    <book v-bind:book="book" v-bind:comments="comments">
         {{--Vue elements goes here--}}
-    </router-view>
+    </book>
 
 @endsection

@@ -60,7 +60,7 @@ class ReviewsController extends Controller
         $review = new Review();
 
         $review->create($request->all());
-        broadcast(new BroadcastComment($review))->toOthers();
+        broadcast(new BroadcastComment($review));
 
         return response('success');
     }
@@ -101,6 +101,7 @@ class ReviewsController extends Controller
 
         $review->update($request->all());
 
+        broadcast(new BroadcastComment($review))->toOthers();
         return response('success');
     }
 

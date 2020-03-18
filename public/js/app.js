@@ -2319,13 +2319,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'book',
+  props: ['book', 'comments'],
   data: function data() {
     return {
       bookId: '',
-      book: {},
       bookData: {},
       reviewId: '',
-      comments: {},
       comment: '',
       newForm: new Form({
         book_id: '',
@@ -2342,32 +2341,32 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getBook: function getBook() {
+    /*getBook(){
+        this.loading = true;
+        axios
+            .get('/fetch-book/'+ this.bookId)
+            .then(response => {
+                this.loading = false;
+                this.book = response.data;
+             }).catch(error => {
+            this.loading = false;
+            this.error = error.response.data.message || error.message;
+        });
+    },*/
+    getdata: function getdata() {
       var _this = this;
 
       this.loading = true;
-      axios.get('/fetch-book/' + this.bookId).then(function (response) {
+      axios.get('/fetch-book/' + this.bookId + '/edit').then(function (response) {
         _this.loading = false;
-        _this.book = response.data;
+        _this.bookData = response.data;
+
+        _this.editForm.fill(_this.bookData.review);
+
+        _this.reviewId = _this.bookData.review.id;
       })["catch"](function (error) {
         _this.loading = false;
         _this.error = error.response.data.message || error.message;
-      });
-    },
-    getdata: function getdata() {
-      var _this2 = this;
-
-      this.loading = true;
-      axios.get('/fetch-book/' + this.bookId + '/edit').then(function (response) {
-        _this2.loading = false;
-        _this2.bookData = response.data;
-
-        _this2.editForm.fill(_this2.bookData.review);
-
-        _this2.reviewId = _this2.bookData.review.id;
-      })["catch"](function (error) {
-        _this2.loading = false;
-        _this2.error = error.response.data.message || error.message;
       });
     },
     postComment: function postComment() {
@@ -2392,39 +2391,36 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error.message);
       });
-    },
-    getComment: function getComment() {
-      var _this3 = this;
-
-      this.loading = true;
-      axios.get('/book/comments/' + this.bookId).then(function (response) {
-        _this3.loading = false;
-        _this3.comments = response.data;
-      })["catch"](function (error) {
-        _this3.loading = false;
-        _this3.error = error.response.data.message || error.message;
-      });
     }
+    /* getComment(){
+         this.loading = true;
+         axios
+             .get('/book/comments/'+ this.bookId)
+             .then(response => {
+                 this.loading = false;
+                 this.comments = response.data;
+              }).catch(error => {
+             this.loading = false;
+             this.error = error.response.data.message || error.message;
+         });
+     },*/
+
   },
   created: function created() {
-    var _this4 = this;
+    var _this2 = this;
 
-    this.bookId = this.$route.params.id;
-    this.path = this.$route.path;
+    //this.getBook();
+    //this.bookId = this.$route.params.id;
+    var path = this.$route.path;
+    var res = path.split('/');
+    this.bookId = res[res.length - 1];
     this.newForm.book_id = this.bookId;
-    this.getBook();
-    this.getdata();
-    this.getComment();
+    this.getdata(); //this.getComment();
+
     Fire.$on('profileUpdate', function () {
-      _this4.getBook();
+      //this.getBook();
+      _this2.getdata(); //this.getComment();
 
-      _this4.getdata();
-
-      _this4.getComment();
-    });
-    var channel = Echo.channel('Review.' + this.bookId);
-    channel.listen('.BroadcastComment', function (data) {
-      this.getComment();
     });
   }
 });
@@ -112020,12 +112016,10 @@ Vue.filter('fromNow', function (text) {
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('book', __webpack_require__(/*! ./components/Book.vue */ "./resources/js/components/Book.vue")["default"]);
-var routes = [{
-  path: '/get-book/:id',
-  component: __webpack_require__(/*! ./components/Book.vue */ "./resources/js/components/Book.vue")["default"],
-  name: 'get-book'
-}];
+Vue.component('book', __webpack_require__(/*! ./components/Book.vue */ "./resources/js/components/Book.vue")["default"]); // let routes = [
+//     {path:'/get-book/:id', component: require('./components/Book.vue').default, name:'get-book'},
+// ];
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -112033,13 +112027,49 @@ var routes = [{
  */
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
-  mode: 'history',
-  routes: routes
+  mode: 'history' //routes
+
 });
 var app = new Vue({
   el: '#app',
   router: router,
-  created: function created() {}
+  data: {
+    book: '',
+    comments: ''
+  },
+  created: function created() {
+    var _this = this;
+
+    var bookId = $('meta[name="bookId"]').attr('content');
+
+    if (bookId != undefined) {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/fetch-book/' + bookId).then(function (response) {
+        _this.book = response.data;
+      })["catch"](function (error) {
+        _this.loading = false;
+        _this.error = error.response.data.message || error.message;
+      });
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/book/comments/' + bookId).then(function (response) {
+        _this.comments = response.data;
+      })["catch"](function (error) {
+        _this.loading = false;
+        _this.error = error.response.data.message || error.message;
+      });
+      Echo["private"]('Review.' + this.bookId).listen('.App\Event\BroadcastComment', function (response) {
+        // axios
+        //     .get('/book/comments/'+ bookId)
+        //     .then(response => {
+        //
+        //         this.comments = response.data;
+        //
+        //     }).catch(error => {
+        //     this.loading = false;
+        //     this.error = error.response.data.message || error.message;
+        // });
+        console.log(response);
+      });
+    }
+  }
 });
 /*var channel = Echo.channel('my-channel');
 channel.listen('.my-event', function(data) {

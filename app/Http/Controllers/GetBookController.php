@@ -29,8 +29,8 @@ class GetBookController extends Controller
      */
     public function getbook($id)
     {
-
-        return view('book');
+        $book = Book::findOrFail($id);
+        return view('book', compact('book'));
     }
 
     /**

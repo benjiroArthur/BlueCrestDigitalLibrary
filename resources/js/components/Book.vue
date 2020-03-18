@@ -190,13 +190,12 @@
 <script>
     export default {
         name: 'book',
+        props:['book', 'comments'],
         data(){
             return{
                 bookId:'',
-                book: {},
                 bookData:{},
                 reviewId:'',
-                comments:{},
                 comment:'',
                 newForm: new Form({
                     book_id: '',
@@ -214,7 +213,7 @@
             };
         },
         methods:{
-            getBook(){
+            /*getBook(){
                 this.loading = true;
                 axios
                     .get('/fetch-book/'+ this.bookId)
@@ -226,7 +225,7 @@
                     this.loading = false;
                     this.error = error.response.data.message || error.message;
                 });
-            },
+            },*/
 
             getdata(){
                 this.loading = true;
@@ -274,7 +273,7 @@
                         console.log(error.message);
                     });
             },
-            getComment(){
+           /* getComment(){
                 this.loading = true;
                 axios
                     .get('/book/comments/'+ this.bookId)
@@ -286,32 +285,30 @@
                     this.loading = false;
                     this.error = error.response.data.message || error.message;
                 });
-            },
+            },*/
 
         },
         created(){
-            this.bookId = this.$route.params.id;
-            this.path = this.$route.path;
+
+            //this.getBook();
+
+            //this.bookId = this.$route.params.id;
+
+            let path = this.$route.path;
+            let res = path.split('/');
+            this.bookId = res[res.length - 1];
             this.newForm.book_id = this.bookId;
-
-
-
-
-            this.getBook();
             this.getdata();
-            this.getComment();
+            //this.getComment();
 
 
             Fire.$on('profileUpdate', () => {
-                this.getBook();
+                //this.getBook();
                 this.getdata();
-                this.getComment();
+                //this.getComment();
             });
 
-                    let channel = Echo.channel('Review.'+this.bookId);
-                        channel.listen('.BroadcastComment', function(data) {
-                            this.getComment();
-                        });
+
 
 
         }

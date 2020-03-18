@@ -54,9 +54,9 @@ Vue.filter('fromNow', function(text){
 
 Vue.component('book', require('./components/Book.vue').default);
 
-let routes = [
-    {path:'/get-book/:id', component: require('./components/Book.vue').default, name:'get-book'},
-];
+// let routes = [
+//     {path:'/get-book/:id', component: require('./components/Book.vue').default, name:'get-book'},
+// ];
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -65,15 +65,59 @@ let routes = [
 
 const router = new VueRouter({
     mode:'history',
-    routes
+    //routes
 
 });
 
 const app = new Vue({
     el: '#app',
     router,
+    data:{
+        book:'',
+        comments:''
+    },
     created(){
+            const bookId = $('meta[name="bookId"]').attr('content');
 
+            if(bookId != undefined){
+                axios
+                    .get('/fetch-book/'+ bookId)
+                    .then(response => {
+
+                        this.book = response.data;
+
+                    }).catch(error => {
+                    this.loading = false;
+                    this.error = error.response.data.message || error.message;
+                });
+
+
+                axios
+                    .get('/book/comments/'+ bookId)
+                    .then(response => {
+
+                        this.comments = response.data;
+
+                    }).catch(error => {
+                    this.loading = false;
+                    this.error = error.response.data.message || error.message;
+                });
+
+                Echo.private('Review.'+this.bookId)
+                    .listen('.App\Event\BroadcastComment', (response) => {
+                    // axios
+                    //     .get('/book/comments/'+ bookId)
+                    //     .then(response => {
+                    //
+                    //         this.comments = response.data;
+                    //
+                    //     }).catch(error => {
+                    //     this.loading = false;
+                    //     this.error = error.response.data.message || error.message;
+                    // });
+                        console.log(response);
+                });
+            }
     }
 });
 
