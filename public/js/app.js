@@ -112122,7 +112122,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: "b83f00746991edf94079",
   cluster: "eu",
-  encrypted: true
+  encrypted: false
 });
 
 /***/ }),
