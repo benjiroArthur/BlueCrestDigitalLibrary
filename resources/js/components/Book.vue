@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <a class="btn btn-success mx-2" v-bind:href="'/download-book/' + book.id" target="_blank"><span class="mdi mdi-book-open"></span> Open</a>
+                    <a class="btn btn-success mx-2" v-bind:href="'/open-book/' + book.id" target="_blank"><span class="mdi mdi-book-open"></span> Open</a>
 
 
                     <a v-if="bookData.review !== null && bookData.review.like === 1" class="btn btn-primary mx-2" href="#" data-toggle="modal" data-target="#likeEditReviewModal"><span class="mdi mdi-thumb-down text-danger"></span> Review/Unlike</a>
@@ -127,7 +127,7 @@
                     <div class="form-group">
 
                         <textarea v-model="newForm.comment" type="text" name="comment" parsley-trigger="change" required
-                                  placeholder="Comment" class="form-control" id="comment" rows="3"></textarea>
+                                  placeholder="Comment" class="form-control" id="newcomment" rows="3"></textarea>
                     </div>
 
                 </div>
@@ -190,13 +190,14 @@
 <script>
     export default {
         name: 'book',
-        props:['book', 'comments'],
+        props:['book'],
         data(){
             return{
+
                 bookId:'',
                 bookData:{},
                 reviewId:'',
-                comment:'',
+                comments:{},
                 newForm: new Form({
                     book_id: '',
                     user_id: this.$userId,
@@ -216,7 +217,7 @@
             /*getBook(){
                 this.loading = true;
                 axios
-                    .get('/fetch-book/'+ this.bookId)
+                    .get('/fetch-book/'+ this.book.id)
                     .then(response => {
                         this.loading = false;
                         this.book = response.data;
@@ -230,11 +231,11 @@
             getdata(){
                 this.loading = true;
                 axios
-                    .get('/fetch-book/'+ this.bookId + '/edit')
+                    .get('/fetch-book/'+ this.book.id + '/edit')
                     .then(response => {
                         this.loading = false;
                         this.bookData = response.data;
-                        this.editForm.fill(this.bookData.review)
+                        this.editForm.fill(this.bookData.review);
                         this.reviewId = this.bookData.review.id;
 
                     }).catch(error => {
@@ -250,7 +251,7 @@
                         $('#createReviewModal').modal('hide');
                        if(response.data === 'success'){
                            //this.comments.push(this.newForm);
-                           Fire.$emit('profileUpdate');
+                           /*Fire.$emit('profileUpdate');*/
                        }
 
 
@@ -265,7 +266,7 @@
                     .then((response) => {
                         $('#likeEditReviewModal').modal('hide');
                        if(response.data === 'success'){
-                           Fire.$emit('profileUpdate');
+                           /*Fire.$emit('profileUpdate');*/
                        }
 
                     })
@@ -273,10 +274,10 @@
                         console.log(error.message);
                     });
             },
-           /* getComment(){
+            getComment(){
                 this.loading = true;
                 axios
-                    .get('/book/comments/'+ this.bookId)
+                    .get('/book/comments/'+ this.book.id)
                     .then(response => {
                         this.loading = false;
                         this.comments = response.data;
@@ -285,32 +286,28 @@
                     this.loading = false;
                     this.error = error.response.data.message || error.message;
                 });
-            },*/
+            },
 
         },
         created(){
-
-            //this.getBook();
-
-            //this.bookId = this.$route.params.id;
-
             let path = this.$route.path;
             let res = path.split('/');
             this.bookId = res[res.length - 1];
             this.newForm.book_id = this.bookId;
             this.getdata();
-            //this.getComment();
-
-
-            Fire.$on('profileUpdate', () => {
-                //this.getBook();
-                this.getdata();
-                //this.getComment();
-            });
+            this.getComment();
 
 
 
 
+
+        },
+        mounted() {
+            Echo.private(`review.${this.book.id}`)
+                .listen('BroadcastComment', (e) => {
+                    this.getComment();
+                    this.getdata();
+                })
         }
     }
 </script>

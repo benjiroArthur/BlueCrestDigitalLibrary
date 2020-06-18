@@ -33,6 +33,7 @@ class Book extends Model
     {
 
         return public_path().'/books/'.$value;
+        //return asset('books/'.$value);
 
     }
 //    public function getYearOfPublicationAttribute($value)

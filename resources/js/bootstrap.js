@@ -38,4 +38,6 @@ window.Echo = new Echo({
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     encrypted: false,
+    wsHost: window.location.hostname,
+    wsPort: 6001
 });

@@ -16,6 +16,6 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 });
 
 
-Broadcast::channel('Review.{book_id}', function ($review, $book_id) {
+Broadcast::channel('review.{book_id}', function ($review, $book_id) {
     return true;
 });

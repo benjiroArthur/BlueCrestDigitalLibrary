@@ -76,49 +76,7 @@ const app = new Vue({
         book:'',
         comments:''
     },
-    created(){
-            const bookId = $('meta[name="bookId"]').attr('content');
 
-            if(bookId != undefined){
-                axios
-                    .get('/fetch-book/'+ bookId)
-                    .then(response => {
-
-                        this.book = response.data;
-
-                    }).catch(error => {
-                    this.loading = false;
-                    this.error = error.response.data.message || error.message;
-                });
-
-
-                axios
-                    .get('/book/comments/'+ bookId)
-                    .then(response => {
-
-                        this.comments = response.data;
-
-                    }).catch(error => {
-                    this.loading = false;
-                    this.error = error.response.data.message || error.message;
-                });
-
-                Echo.private('Review.'+this.bookId)
-                    .listen('.App\Event\BroadcastComment', (response) => {
-                    // axios
-                    //     .get('/book/comments/'+ bookId)
-                    //     .then(response => {
-                    //
-                    //         this.comments = response.data;
-                    //
-                    //     }).catch(error => {
-                    //     this.loading = false;
-                    //     this.error = error.response.data.message || error.message;
-                    // });
-                        console.log(response);
-                });
-            }
-    }
 });
 
 

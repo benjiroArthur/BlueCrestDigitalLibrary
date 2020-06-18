@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class GetBookController extends Controller
 {
@@ -145,8 +146,15 @@ class GetBookController extends Controller
 
         $book = Book::find($id);
         $file = $book->file_name;
-        $file = asset('books/'.$file);
-       return view('openBook', compact('file'));
+        //$file = asset('books/'.$file);
+
+       // return response($file);
+       //return view('openBook', compact('book'));
+        $headers = [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="'.$book->title.'"'
+        ];
+        return response()->file($file, $headers);
 
     }
 }

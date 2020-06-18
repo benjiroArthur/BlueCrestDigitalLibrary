@@ -30,6 +30,7 @@
         "pusher-js": "^5.0.3",
         "socket.io-client": "^2.3.0",
         "vform": "^1.0.1",
+        "vue-pdf": "^4.0.8",
         "vue-router": "^3.1.3"
     }
 }

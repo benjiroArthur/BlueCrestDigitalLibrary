@@ -24,7 +24,7 @@
     </div>
     <!-- end page title end breadcrumb -->
 
-    <book v-bind:book="book" v-bind:comments="comments">
+    <book :book="{{$book}}">
         {{--Vue elements goes here--}}
     </book>
 

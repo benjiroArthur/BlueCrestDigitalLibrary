@@ -2319,13 +2319,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'book',
-  props: ['book', 'comments'],
+  props: ['book'],
   data: function data() {
     return {
       bookId: '',
       bookData: {},
       reviewId: '',
-      comment: '',
+      comments: {},
       newForm: new Form({
         book_id: '',
         user_id: this.$userId,
@@ -2344,7 +2344,7 @@ __webpack_require__.r(__webpack_exports__);
     /*getBook(){
         this.loading = true;
         axios
-            .get('/fetch-book/'+ this.bookId)
+            .get('/fetch-book/'+ this.book.id)
             .then(response => {
                 this.loading = false;
                 this.book = response.data;
@@ -2357,7 +2357,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.loading = true;
-      axios.get('/fetch-book/' + this.bookId + '/edit').then(function (response) {
+      axios.get('/fetch-book/' + this.book.id + '/edit').then(function (response) {
         _this.loading = false;
         _this.bookData = response.data;
 
@@ -2373,9 +2373,9 @@ __webpack_require__.r(__webpack_exports__);
       this.newForm.post('/book/review').then(function (response) {
         $('#createReviewModal').modal('hide');
 
-        if (response.data === 'success') {
-          //this.comments.push(this.newForm);
-          Fire.$emit('profileUpdate');
+        if (response.data === 'success') {//this.comments.push(this.newForm);
+
+          /*Fire.$emit('profileUpdate');*/
         }
       })["catch"](function (error) {
         console.log(error.message);
@@ -2386,41 +2386,40 @@ __webpack_require__.r(__webpack_exports__);
         $('#likeEditReviewModal').modal('hide');
 
         if (response.data === 'success') {
-          Fire.$emit('profileUpdate');
+          /*Fire.$emit('profileUpdate');*/
         }
       })["catch"](function (error) {
         console.log(error.message);
       });
-    }
-    /* getComment(){
-         this.loading = true;
-         axios
-             .get('/book/comments/'+ this.bookId)
-             .then(response => {
-                 this.loading = false;
-                 this.comments = response.data;
-              }).catch(error => {
-             this.loading = false;
-             this.error = error.response.data.message || error.message;
-         });
-     },*/
+    },
+    getComment: function getComment() {
+      var _this2 = this;
 
+      this.loading = true;
+      axios.get('/book/comments/' + this.book.id).then(function (response) {
+        _this2.loading = false;
+        _this2.comments = response.data;
+      })["catch"](function (error) {
+        _this2.loading = false;
+        _this2.error = error.response.data.message || error.message;
+      });
+    }
   },
   created: function created() {
-    var _this2 = this;
-
-    //this.getBook();
-    //this.bookId = this.$route.params.id;
     var path = this.$route.path;
     var res = path.split('/');
     this.bookId = res[res.length - 1];
     this.newForm.book_id = this.bookId;
-    this.getdata(); //this.getComment();
+    this.getdata();
+    this.getComment();
+  },
+  mounted: function mounted() {
+    var _this3 = this;
 
-    Fire.$on('profileUpdate', function () {
-      //this.getBook();
-      _this2.getdata(); //this.getComment();
+    Echo["private"]("review.".concat(this.book.id)).listen('BroadcastComment', function (e) {
+      _this3.getComment();
 
+      _this3.getdata();
     });
   }
 });
@@ -78197,7 +78196,7 @@ class PDFTrailer extends PDFDictionary {
 
     const id = (new PDFString(info.id)).toHexString()
     this.set('ID', new PDFArray([id, id]))
-    
+
     // Default to now and convert to string
     info.creationDate = formatDate(info.creationDate || new Date)
     if (!info.producer) {
@@ -84086,7 +84085,7 @@ module.exports = v4;
 /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, dependencies, deprecated, description, devDependencies, engines, homepage, keywords, license, main, name, repository, scripts, types, version, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_from\":\"pdfjs\",\"_id\":\"pdfjs@2.3.5\",\"_inBundle\":false,\"_integrity\":\"sha512-GDu8Oz9b/REu1tvd6J+xewfSpHJ0qSw8YFH3gSbZDDDt9GIxyIA/89wgMHeD3nv43xJrg86lK/XnlTOyFfGX4g==\",\"_location\":\"/pdfjs\",\"_phantomChildren\":{\"inherits\":\"2.0.4\",\"string_decoder\":\"1.1.1\",\"util-deprecate\":\"1.0.2\"},\"_requested\":{\"type\":\"tag\",\"registry\":true,\"raw\":\"pdfjs\",\"name\":\"pdfjs\",\"escapedName\":\"pdfjs\",\"rawSpec\":\"\",\"saveSpec\":null,\"fetchSpec\":\"latest\"},\"_requiredBy\":[\"#USER\",\"/\"],\"_resolved\":\"https://registry.npmjs.org/pdfjs/-/pdfjs-2.3.5.tgz\",\"_shasum\":\"700682550204f37b04539bf436e64fa758d23d1f\",\"_spec\":\"pdfjs\",\"_where\":\"C:\\\\xampp\\\\htdocs\\\\BlueCrestGigitalLibrary\",\"author\":{\"name\":\"Markus Ast\",\"email\":\"npm.m@rkusa.st\"},\"bugs\":{\"url\":\"https://github.com/rkusa/pdfjs/issues\"},\"bundleDependencies\":false,\"dependencies\":{\"@rkusa/linebreak\":\"^1.0.0\",\"opentype.js\":\"^1.1.0\",\"pako\":\"^1.0.10\",\"readable-stream\":\"^3.5.0\",\"unorm\":\"^1.6.0\",\"uuid\":\"^3.4.0\"},\"deprecated\":false,\"description\":\"A Portable Document Format (PDF) generation library targeting both the server- and client-side.\",\"devDependencies\":{\"@types/node\":\"^13.5.0\",\"tape\":\"^4.13.0\",\"typescript\":\"^3.7.5\"},\"engines\":{\"node\":\">=7\"},\"homepage\":\"https://github.com/rkusa/pdfjs\",\"keywords\":[\"pdf\",\"generator\"],\"license\":\"MIT\",\"main\":\"lib/\",\"name\":\"pdfjs\",\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/rkusa/pdfjs.git\"},\"scripts\":{\"test\":\"npm run test:pdfs && npm run test:types\",\"test:pdfs\":\"node test/index.js\",\"test:types\":\"tsc --project ./types\"},\"types\":\"./types/main.d.ts\",\"version\":\"2.3.5\"}");
+module.exports = JSON.parse("{\"_from\":\"pdfjs\",\"_id\":\"pdfjs@2.3.5\",\"_inBundle\":false,\"_integrity\":\"sha512-GDu8Oz9b/REu1tvd6J+xewfSpHJ0qSw8YFH3gSbZDDDt9GIxyIA/89wgMHeD3nv43xJrg86lK/XnlTOyFfGX4g==\",\"_location\":\"/pdfjs\",\"_phantomChildren\":{\"inherits\":\"2.0.4\",\"string_decoder\":\"1.1.1\",\"util-deprecate\":\"1.0.2\"},\"_requested\":{\"type\":\"tag\",\"registry\":true,\"raw\":\"pdfjs\",\"name\":\"pdfjs\",\"escapedName\":\"pdfjs\",\"rawSpec\":\"\",\"saveSpec\":null,\"fetchSpec\":\"latest\"},\"_requiredBy\":[\"#USER\",\"/\"],\"_resolved\":\"https://registry.npmjs.org/pdfjs/-/pdfjs-2.3.5.tgz\",\"_shasum\":\"700682550204f37b04539bf436e64fa758d23d1f\",\"_spec\":\"pdfjs\",\"_where\":\"C:\\\\xampp\\\\htdocs\\\\BlueCrestDigitalLibrary\",\"author\":{\"name\":\"Markus Ast\",\"email\":\"npm.m@rkusa.st\"},\"bugs\":{\"url\":\"https://github.com/rkusa/pdfjs/issues\"},\"bundleDependencies\":false,\"dependencies\":{\"@rkusa/linebreak\":\"^1.0.0\",\"opentype.js\":\"^1.1.0\",\"pako\":\"^1.0.10\",\"readable-stream\":\"^3.5.0\",\"unorm\":\"^1.6.0\",\"uuid\":\"^3.4.0\"},\"deprecated\":false,\"description\":\"A Portable Document Format (PDF) generation library targeting both the server- and client-side.\",\"devDependencies\":{\"@types/node\":\"^13.5.0\",\"tape\":\"^4.13.0\",\"typescript\":\"^3.7.5\"},\"engines\":{\"node\":\">=7\"},\"homepage\":\"https://github.com/rkusa/pdfjs\",\"keywords\":[\"pdf\",\"generator\"],\"license\":\"MIT\",\"main\":\"lib/\",\"name\":\"pdfjs\",\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/rkusa/pdfjs.git\"},\"scripts\":{\"test\":\"npm run test:pdfs && npm run test:types\",\"test:pdfs\":\"node test/index.js\",\"test:types\":\"tsc --project ./types\"},\"types\":\"./types/main.d.ts\",\"version\":\"2.3.5\"}");
 
 /***/ }),
 
@@ -94167,10 +94166,10 @@ function Data(source, dest) {
   this.sourceIndex = 0;
   this.tag = 0;
   this.bitcount = 0;
-  
+
   this.dest = dest;
   this.destLen = 0;
-  
+
   this.ltree = new Tree();  /* dynamic length/symbol tree */
   this.dtree = new Tree();  /* dynamic distance tree */
 }
@@ -94312,7 +94311,7 @@ function tinf_decode_symbol(d, t) {
     d.tag |= d.source[d.sourceIndex++] << d.bitcount;
     d.bitcount += 8;
   }
-  
+
   var sum = 0, cur = 0, len = 0;
   var tag = d.tag;
 
@@ -94325,7 +94324,7 @@ function tinf_decode_symbol(d, t) {
     sum += t.table[len];
     cur -= t.table[len];
   } while (cur >= 0);
-  
+
   d.tag = tag;
   d.bitcount -= len;
 
@@ -94436,7 +94435,7 @@ function tinf_inflate_block_data(d, lt, dt) {
 function tinf_inflate_uncompressed_block(d) {
   var length, invlength;
   var i;
-  
+
   /* unread from bitbuffer */
   while (d.bitcount > 8) {
     d.sourceIndex--;
@@ -94509,7 +94508,7 @@ function tinf_uncompress(source, dest) {
     else
       return d.dest.subarray(0, d.destLen);
   }
-  
+
   return d.dest;
 }
 
@@ -95061,7 +95060,7 @@ UChar.udata={
          configurable: true,
          writable: true,
          value: function normalize (/*form*/) {
-            
+
             var str = "" + this;
             var form = arguments[0] === undefined ? "NFC" : arguments[0];
 
@@ -95862,7 +95861,7 @@ var staticRenderFns = []
   }
 });
 // CONCATENATED MODULE: ./src/components/HasError.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_HasErrorvue_type_script_lang_js_ = (HasErrorvue_type_script_lang_js_); 
+ /* harmony default export */ var components_HasErrorvue_type_script_lang_js_ = (HasErrorvue_type_script_lang_js_);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 
@@ -95974,7 +95973,7 @@ var component = normalizeComponent(
   null,
   null,
   null
-  
+
 )
 
 component.options.__file = "HasError.vue"
@@ -96032,7 +96031,7 @@ var AlertErrorvue_type_template_id_5610eddd_staticRenderFns = []
   }
 });
 // CONCATENATED MODULE: ./src/components/AlertError.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_AlertErrorvue_type_script_lang_js_ = (AlertErrorvue_type_script_lang_js_); 
+ /* harmony default export */ var components_AlertErrorvue_type_script_lang_js_ = (AlertErrorvue_type_script_lang_js_);
 // CONCATENATED MODULE: ./src/components/AlertError.vue
 
 
@@ -96049,7 +96048,7 @@ var AlertError_component = normalizeComponent(
   null,
   null,
   null
-  
+
 )
 
 AlertError_component.options.__file = "AlertError.vue"
@@ -96088,7 +96087,7 @@ var AlertErrorsvue_type_template_id_40d77fd7_staticRenderFns = []
   }
 });
 // CONCATENATED MODULE: ./src/components/AlertErrors.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_AlertErrorsvue_type_script_lang_js_ = (AlertErrorsvue_type_script_lang_js_); 
+ /* harmony default export */ var components_AlertErrorsvue_type_script_lang_js_ = (AlertErrorsvue_type_script_lang_js_);
 // CONCATENATED MODULE: ./src/components/AlertErrors.vue
 
 
@@ -96105,7 +96104,7 @@ var AlertErrors_component = normalizeComponent(
   null,
   null,
   null
-  
+
 )
 
 AlertErrors_component.options.__file = "AlertErrors.vue"
@@ -96142,7 +96141,7 @@ var AlertSuccessvue_type_template_id_fd18e236_staticRenderFns = []
   }
 });
 // CONCATENATED MODULE: ./src/components/AlertSuccess.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_AlertSuccessvue_type_script_lang_js_ = (AlertSuccessvue_type_script_lang_js_); 
+ /* harmony default export */ var components_AlertSuccessvue_type_script_lang_js_ = (AlertSuccessvue_type_script_lang_js_);
 // CONCATENATED MODULE: ./src/components/AlertSuccess.vue
 
 
@@ -96159,7 +96158,7 @@ var AlertSuccess_component = normalizeComponent(
   null,
   null,
   null
-  
+
 )
 
 AlertSuccess_component.options.__file = "AlertSuccess.vue"
@@ -96283,7 +96282,7 @@ var render = function() {
             "a",
             {
               staticClass: "btn btn-success mx-2",
-              attrs: { href: "/download-book/" + _vm.book.id, target: "_blank" }
+              attrs: { href: "/open-book/" + _vm.book.id, target: "_blank" }
             },
             [_c("span", { staticClass: "mdi mdi-book-open" }), _vm._v(" Open")]
           ),
@@ -96508,7 +96507,7 @@ var render = function() {
                         "parsley-trigger": "change",
                         required: "",
                         placeholder: "Comment",
-                        id: "comment",
+                        id: "newcomment",
                         rows: "3"
                       },
                       domProps: { value: _vm.newForm.comment },
@@ -112036,39 +112035,6 @@ var app = new Vue({
   data: {
     book: '',
     comments: ''
-  },
-  created: function created() {
-    var _this = this;
-
-    var bookId = $('meta[name="bookId"]').attr('content');
-
-    if (bookId != undefined) {
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/fetch-book/' + bookId).then(function (response) {
-        _this.book = response.data;
-      })["catch"](function (error) {
-        _this.loading = false;
-        _this.error = error.response.data.message || error.message;
-      });
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/book/comments/' + bookId).then(function (response) {
-        _this.comments = response.data;
-      })["catch"](function (error) {
-        _this.loading = false;
-        _this.error = error.response.data.message || error.message;
-      });
-      Echo["private"]('Review.' + this.bookId).listen('.App\Event\BroadcastComment', function (response) {
-        // axios
-        //     .get('/book/comments/'+ bookId)
-        //     .then(response => {
-        //
-        //         this.comments = response.data;
-        //
-        //     }).catch(error => {
-        //     this.loading = false;
-        //     this.error = error.response.data.message || error.message;
-        // });
-        console.log(response);
-      });
-    }
   }
 });
 /*var channel = Echo.channel('my-channel');
@@ -112122,7 +112088,9 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: "b83f00746991edf94079",
   cluster: "eu",
-  encrypted: false
+  encrypted: false,
+  wsHost: window.location.hostname,
+  wsPort: 6001
 });
 
 /***/ }),
@@ -112154,7 +112122,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -112174,7 +112142,7 @@ component.options.__file = "resources/js/components/Book.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Book_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Book.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Book.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Book_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Book_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -112214,8 +112182,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\BlueCrestGigitalLibrary\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\BlueCrestGigitalLibrary\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\BlueCrestDigitalLibrary\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\BlueCrestDigitalLibrary\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),

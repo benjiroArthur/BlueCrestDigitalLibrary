@@ -18,7 +18,7 @@ class BroadcastComment implements ShouldBroadcast
     public $review;
     /**
      * Create a new event instance.
-     *
+     *@param Review $review
      * @return void
      */
     public function __construct(Review $review)
@@ -35,4 +35,7 @@ class BroadcastComment implements ShouldBroadcast
     {
         return new PrivateChannel('review.'.$this->review->book_id);
     }
+    /*public function broadcastWith(){
+        return ['review' => $this->review];
+    }*/
 }

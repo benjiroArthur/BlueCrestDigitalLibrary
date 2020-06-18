@@ -148,6 +148,14 @@
                             </div>
 
                         </li>
+                        @else
+                        <li class="nav-item pr-5">
+                            <a href="{{url('/users/'.auth()->user()->id)}}" class="nav-link text-white">
+                                <i class="link-icon mdi mdi-account"></i>
+                                <span class="menu-title">My Profile</span>
+                            </a>
+                        </li>
+
                     @endif
                 </ul>
 

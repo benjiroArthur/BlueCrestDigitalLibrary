@@ -59,8 +59,9 @@ class ReviewsController extends Controller
 
         $review = new Review();
 
-        $review->create($request->all());
-        broadcast(new BroadcastComment($review));
+        $review = $review->create($request->all());
+        $reviews = Review::find($review->id);
+        broadcast(new BroadcastComment($reviews));
 
         return response('success');
     }
@@ -100,8 +101,8 @@ class ReviewsController extends Controller
         $review = Review::find($id);
 
         $review->update($request->all());
-
-        broadcast(new BroadcastComment($review))->toOthers();
+        $reviews = Review::find($id);
+        broadcast(new BroadcastComment($reviews));
         return response('success');
     }
 
