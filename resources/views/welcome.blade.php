@@ -1,6 +1,4 @@
-
-
-        <!-- Styles -->
+<!-- Styles -->
         <style>
             html, body {
                 background-color: #fff;
