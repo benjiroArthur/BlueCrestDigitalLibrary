@@ -64,48 +64,51 @@
                                 {{--carousel starts--}}
                                 <div class="row justify-content-center">
                                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner" style="height: 500px;">
+                                    <div class="carousel-inner" style="height: 400px; width: auto;">
                                         <div class="carousel-item active">
                                             <img src="{{asset('images/assets/bc_welcome_logo.png')}}" class="d-block img-fluid" alt="...">
                                         </div>
-                                        <div class="carousel-item">
+                                        <div class="carousel-item img-fluid">
                                             <img src="{{asset('images/assets/banner1.jpg')}}" class="d-block img-fluid" alt="...">
                                         </div>
-                                        <div class="carousel-item">
+                                        <div class="carousel-item img-fluid">
                                             <img src="{{asset('images/assets/banner2.jpg')}}" class="d-block img-fluid" alt="...">
                                         </div>
-                                        <div class="carousel-item">
+                                        <div class="carousel-item img-fluid">
                                             <img src="{{asset('images/assets/banner3.jpg')}}" class="d-block img-fluid" alt="...">
                                         </div>
-                                        <div class="carousel-item">
+                                        <div class="carousel-item img-fluid">
                                             <img src="{{asset('images/assets/banner4.jpg')}}" class="d-block img-fluid" alt="...">
                                         </div>
-                                        <div class="carousel-item">
+                                        <div class="carousel-item img-fluid">
                                             <img src="{{asset('images/assets/banner5.jpg')}}" class="d-block img-fluid" alt="...">
                                         </div>
-                                        <div class="carousel-item">
+                                        <div class="carousel-item img-fluid">
                                             <img src="{{asset('images/assets/banner6.jpg')}}" class="d-block img-fluid" alt="...">
                                         </div>
-                                        <div class="carousel-item">
+                                        <div class="carousel-item img-fluid">
                                             <img src="{{asset('images/assets/banner7.jpg')}}" class="d-block img-fluid" alt="...">
                                         </div>
-                                        <div class="carousel-item">
-                                            <img src="{{asset('images/assets/banner13.jpg')}}" class="d-block img-fluid" alt="...">
+                                        <div class="carousel-item img-fluid">
+                                            <img src="{{asset('images/assets/banner13.jpeg')}}" class="d-block img-fluid" alt="...">
                                         </div>
-                                        <div class="carousel-item">
+                                        <div class="carousel-item img-fluid">
                                             <img src="{{asset('images/assets/banner8.jpg')}}" class="d-block img-fluid" alt="...">
                                         </div>
-                                        <div class="carousel-item">
-                                            <img src="{{asset('images/assets/banner9.jpg')}}" class="d-block img-fluid" alt="...">
+                                        <div class="carousel-item img-fluid">
+                                            <img src="{{asset('images/assets/banner9.jpeg')}}" class="d-block img-fluid" alt="...">
                                         </div>
-                                        <div class="carousel-item">
-                                            <img src="{{asset('images/assets/banner10.jpg')}}" class="d-block img-fluid" alt="...">
+                                        <div class="carousel-item img-fluid">
+                                            <img src="{{asset('images/assets/banner10.jpeg')}}" class="d-block img-fluid" alt="...">
                                         </div>
-                                        <div class="carousel-item">
-                                            <img src="{{asset('images/assets/banner11.jpg')}}" class="d-block img-fluid" alt="...">
+                                        <div class="carousel-item img-fluid">
+                                            <img src="{{asset('images/assets/banner11.jpeg')}}" class="d-block img-fluid" alt="...">
                                         </div>
-                                        <div class="carousel-item">
-                                            <img src="{{asset('images/assets/banner12.jpg')}}" class="d-block img-fluid" alt="...">
+                                        <div class="carousel-item img-fluid">
+                                            <img src="{{asset('images/assets/banner12.jpeg')}}" class="d-block img-fluid" alt="...">
+                                        </div>
+                                        <div class="carousel-item img-fluid">
+                                            <img src="{{asset('images/assets/banner14.jpeg')}}" class="d-block img-fluid" alt="...">
                                         </div>
                                     </div>
                                     <a class="carousel-control-prev" style="color: #09378c !important;" href="#carouselExampleControls" role="button" data-slide="prev">
