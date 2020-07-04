@@ -45,7 +45,7 @@
 
 
 
-                    <a class="btn btn-link text-center" href="">
+                    <a class="btn btn-link text-center" href="{{ route('password.request') }}">
                         {{ __('Forgot Your Password?') }}
                     </a> <br>
 
