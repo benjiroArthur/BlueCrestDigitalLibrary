@@ -39,5 +39,7 @@ window.Echo = new Echo({
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     encrypted: false,
     wsHost: window.location.hostname,
-    wsPort: 6001
+    wsPort: 6001,
+    wssPort: 6001,
 });
+
