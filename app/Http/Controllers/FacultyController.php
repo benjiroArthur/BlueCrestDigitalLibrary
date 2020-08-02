@@ -132,7 +132,7 @@ class FacultyController extends Controller
             $imageNameWithExt = $image_file->getClientOriginalName();
 
             //Get just filename
-            $image_name = pathinfo($imageNameWithExt, PATHINFO_FILENAME);
+            //$image_name = pathinfo($imageNameWithExt, PATHINFO_FILENAME);
             $image_name = $request->input('name');
             $image_name= str::title($image_name);
             $image_name = str_replace(' ', '', $image_name);
@@ -175,8 +175,9 @@ class FacultyController extends Controller
     {
         //Delete selected faculty records
         $faculty = Faculty::findOrFail($id);
-        $faculty->departments()->books()->delete();
+        $faculty->books()->delete();
         $faculty->departments()->delete();
         $faculty->delete();
+        return redirect()->back()->with('success', 'Faculty and It related departments and books have been deleted successfully');
     }
 }

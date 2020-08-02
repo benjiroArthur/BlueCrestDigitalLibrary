@@ -53,7 +53,7 @@
                                             <a class="btn btn-success" href="{{url('faculty/'.$faculty->id)}}"><span class="mdi mdi-eye show"></span></a>
                                             <a class="btn btn-warning" href="{{url('faculty/'.$faculty->id.'/edit')}}"><span class="edit mdi mdi-file-document-edit"></span></a>
                                             <button data-toggle="tooltip" data-placement="top" title="Delete" type="submit" class="btn btn-danger"
-                                                    onclick="return confirm('Deleting this Category will Delete its associate Groups and Books, Are you sure you want to Proceed?')"><span class="mdi mdi-delete"></span></button>
+                                                    onclick="return confirm('Deleting this Faculty will Delete its associate Departments and Books, Are you sure you want to Proceed?')"><span class="mdi mdi-delete"></span></button>
                                             {!! Form::close() !!}
                                         </td>
                                     </tr>

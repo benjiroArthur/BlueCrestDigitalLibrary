@@ -90,7 +90,9 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $department = Department::find($id);
+        $department->update($request->all());
+        return redirect()->back()->with('success', 'Department Records Updated Successfully');
     }
 
     /**
@@ -101,6 +103,9 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $department = Department::find($id);
+        $department->books()->delete();
+        $department->delete();
+        return redirect()->back()->with('success', 'Department and It related books have been deleted successfully');
     }
 }
