@@ -24,7 +24,7 @@
     <link rel="shortcut icon" href="{{asset('icon.png')}}" />
 
     {{--<script src="{{asset('js/jquery.min.js')}}"></script>--}}
-    <script src="{{ asset('js/app.js') }}"></script>
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{--<link href="{{ asset('css/style.css') }}" rel="stylesheet">--}}
@@ -39,7 +39,7 @@
 </head>
 <body>
     <div id="app">
-        <div class="wrapper" id="main">
+
 
             @include('includes.navbar')
 
@@ -50,12 +50,12 @@
                     @yield('content')
                 </div>
             </main>
-        </div>
+
         @include('includes.footer')
     </div>
 
     <!-- Scripts -->
-
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{asset('js/script.js')}}"></script>
     <script src="{{asset('js/navbar_script.js')}}"></script>
 

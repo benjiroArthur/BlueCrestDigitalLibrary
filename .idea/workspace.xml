@@ -2,34 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56ee258e-861f-4835-87ac-fb64a4eec152" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/composerJson.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/books/DataStruct_1596405251.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/books/DataStruct_1596410998.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/books/DataStruct_1596405251.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/books/DataStruct_1596410998.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DepartmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DepartmentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style1.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style1.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/jquery.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/jquery.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/includes/messages.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/messages.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/includes/navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/navbar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/manager/books/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/manager/books/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/manager/books/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/manager/books/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/manager/books/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/manager/books/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/manager/department/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/manager/department/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/manager/department/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/manager/department/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/manager/faculty/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/manager/faculty/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/manager/faculty/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/manager/faculty/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/manager/users/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/manager/users/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/manager/users/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/manager/users/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/profileUpdate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/profileUpdate.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/pwdChange.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/pwdChange.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +200,7 @@
       <workItem from="1595789934508" duration="2982000" />
       <workItem from="1595887513896" duration="2229000" />
       <workItem from="1596230909868" duration="1218000" />
-      <workItem from="1596279278533" duration="19871000" />
+      <workItem from="1596279278533" duration="21356000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1595175334986</created>
@@ -256,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596359891144</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Faculty and Department Updates">
+      <created>1596530506513</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1596530506513</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -271,10 +252,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Faculty and Department Updates" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="425" y="0" key="CommitChangelistDialog2" timestamp="1596494456635">
+    <state x="425" y="0" key="CommitChangelistDialog2" timestamp="1596530499655">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state x="425" y="0" key="CommitChangelistDialog2/0.0.1600.870@0.0.1600.870" timestamp="1596494456635" />
+    <state x="425" y="0" key="CommitChangelistDialog2/0.0.1600.870@0.0.1600.870" timestamp="1596530499655" />
     <state x="580" y="190" key="FileChooserDialogImpl" timestamp="1595887556039">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
