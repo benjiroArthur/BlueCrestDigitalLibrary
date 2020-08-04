@@ -62,12 +62,11 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-
         //validate
         $this->validate($request,[
             'title'=>'required|string|max:225',
             'author'=>'required|string|max:225',
-            'cover_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:225',
+            'cover_image'=>'required|image|mimes:jpeg,png,jpg,gif',
             'file_name'=>'required|mimes:pdf',
             'faculty_id'=>'required',
             'department_id'=>'required',
@@ -82,7 +81,7 @@ class BookController extends Controller
             $fileNameWithExt = $pdf_file->getClientOriginalName();
 
             //Get just filename
-            $file_name = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            //$file_name = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $file_name = $request->input('title');
             $file_name= str::title($file_name);
             $file_name = str_replace(' ','',$file_name);
@@ -115,7 +114,7 @@ class BookController extends Controller
             $imageNameWithExt = $image_file->getClientOriginalName();
 
             //Get just filename
-            $image_name = pathinfo($imageNameWithExt, PATHINFO_FILENAME);
+            //$image_name = pathinfo($imageNameWithExt, PATHINFO_FILENAME);
             $image_name = $request->input('title');
             $image_name= str::title($image_name);
             $image_name = str_replace(' ', '', $image_name);
@@ -199,6 +198,12 @@ class BookController extends Controller
     public function update(Request $request, $id)
     {
         //validate
+        $this->validate($request,[
+            'title'=>'required|string|max:225',
+            'author'=>'required|string|max:225',
+            'faculty_id'=>'required',
+            'department_id'=>'required',
+        ]);
 
             $this->validate($request, [
                 'title' => 'required|string|max:225',
@@ -217,7 +222,7 @@ class BookController extends Controller
             $fileNameWithExt = $pdf_file->getClientOriginalName();
 
             //Get just filename
-            $file_name = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            //$file_name = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $file_name = $request->input('title');
             $file_name= str::title($file_name);
             $file_name = str_replace(' ','',$file_name);
@@ -253,7 +258,7 @@ class BookController extends Controller
             $imageNameWithExt = $image_file->getClientOriginalName();
 
             //Get just filename
-            $image_name = pathinfo($imageNameWithExt, PATHINFO_FILENAME);
+            //$image_name = pathinfo($imageNameWithExt, PATHINFO_FILENAME);
             $image_name = $request->input('title');
             $image_name= str::title($image_name);
             $image_name = str_replace(' ', '', $image_name);

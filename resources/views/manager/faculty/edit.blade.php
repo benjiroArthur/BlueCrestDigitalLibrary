@@ -32,9 +32,9 @@
             {{method_field('PUT')}}
             {{ csrf_field() }}
 
-            <div class="row">
+            <div class="row justify-content-center">
 
-                <div class="col-lg-6 offset-lg-3 formBox">
+                <div class="col-md-6 formBox">
                     <div class="p-20">
 
 

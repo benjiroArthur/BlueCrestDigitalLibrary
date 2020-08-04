@@ -32,8 +32,8 @@
                 {!! Form::open(['action' =>[ 'UsersController@update', auth()->user()->id], 'method' => 'POST', 'enctype' => 'multipart/form-data','files'=>'true']) !!}
                 {{ method_field('PUT') }}
                 {{ csrf_field() }}
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-8 offset-lg-2">
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 col-md-12 col-lg-8">
                         <div class="row formBox">
                             <div class="col-lg-6 col-sm-12">
                                 <div class="p-20">

@@ -47,7 +47,11 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate
+        $this->validate($request,[
+            'name'=>'required|string|max:225',
+            'faculty_id'=>'required',
+        ]);
         $department = new Department();
 
         $department->create($request->all());

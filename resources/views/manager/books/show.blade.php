@@ -21,8 +21,8 @@
     </div>
     <!-- end page title end breadcrumb -->
 
-    <div class="row">
-        <div class="col-sm-12 col-lg-3 offset-2 justify-content-center">
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-lg-3 justify-content-center">
             <div>
                 <img src="{{$book->cover_image}}">
                 <br><br>

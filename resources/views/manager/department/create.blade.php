@@ -32,21 +32,21 @@
 
                 {{ csrf_field() }}
 
-                <div class="row">
+                <div class="row justify-content-center">
 
-                    <div class="col-lg-6 offset-3 formBox">
+                    <div class="col-md-6 formBox">
                         <div class="p-20">
 
 
                             <div class="form-group">
                                 <label for="name">Department Name</label>
-                                <input type="text" name="name" parsley-trigger="change" required
+                                <input type="text" name="name" parsley-trigger="change"
                                        placeholder="Department Name" class="form-control" id="name">
                             </div>
 
                             <div class="form-group">
                                 <label for="faculty_id">Faculty</label>
-                                <select type="text" name="faculty_id" required class="form-control" id="faculty_id">
+                                <select type="text" name="faculty_id" class="form-control" id="faculty_id">
                                     <option value="">Select Faculty</option>
 
                                         @forelse($faculties as $faculty)

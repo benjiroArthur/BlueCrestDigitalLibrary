@@ -23,43 +23,49 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="shortcut icon" href="{{asset('icon.png')}}" />
 
+    {{--<script src="{{asset('js/jquery.min.js')}}"></script>--}}
+    <script src="{{ asset('js/app.js') }}"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    {{--<link href="{{ asset('css/style.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/style1.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/iconfonts/flag-icon-css/css/flag-icon.min.css') }}" rel="stylesheet">
+
     <link href="{{ asset('css/iconfonts/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/iconfonts/ionicons/css/ionicons.css') }}" rel="stylesheet">
     <link href="{{ asset('css/iconfonts/mdi/css/materialdesignicons.css') }}" rel="stylesheet">
     <link href="{{ asset('css/iconfonts/themify-icons/themify-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/iconfonts/flag-icon-css/css/flag-icon.min.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
-        <div class="container-fluid">
-            @include('includes.navbar')
-        </div>
+        <div class="wrapper" id="main">
 
-        <main class="py-4">
-            <div class="container-fluid page-body-wrapper">
-                @include('includes.messages')
-                @yield('content')
-            </div>
-        </main>
+            @include('includes.navbar')
+
+
+            <main class="py-4" style="min-height: 600px">
+                <div class="container-fluid page-body-wrapper">
+                    @include('includes.messages')
+                    @yield('content')
+                </div>
+            </main>
+        </div>
         @include('includes.footer')
     </div>
 
     <!-- Scripts -->
-    <script src="{{asset('js/jquery.min.js')}}"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
     <script src="{{asset('js/script.js')}}"></script>
     <script src="{{asset('js/navbar_script.js')}}"></script>
+
     @yield('script')
     <script>
         $('document').ready(function(){
             setTimeout(function()
             {
-                $('.alert').fadeOut('fast');
-            },3000);
+                $('.alert').fadeOut('slow');
+            },5000);
 
         });
     </script>

@@ -2,7 +2,7 @@
 @section('content')
     <!-- Page-Title -->
     <div class="row mb-2">
-        <div class="col-sm-12 col-lg-12">
+        <div class="col-md-12">
             <div class="page-title-box">
                 <ol class="breadcrumb hide-phone float-right p-0 m-0">
                     <li class="breadcrumb-item">
@@ -32,9 +32,9 @@
 
                 {{ csrf_field() }}
 
-                <div class="row">
+                <div class="row justify-content-center">
 
-                    <div class="col-lg-6 offset-3 formBox">
+                    <div class="col-md-6 formBox">
                         <div class="p-20">
 
 

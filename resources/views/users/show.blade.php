@@ -24,7 +24,7 @@
 
     <h4 class="text-center">My Profile</h4>
 
-    <div class="row ml-2">
+    <div class="row ml-2 justify-content-center">
         <div class="col-sm-12 col-lg-2 justify-content-center">
 
             <div style="width: 130px; height: 130px">

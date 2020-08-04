@@ -3,8 +3,8 @@
     <div class="container mb-5">
         {{--//{{auth()->user()->role->id}}--}}
         <br><br>
-        <div class="row">
-            <div class="col-md-6 offset-md-3 col-sm-12">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-sm-12">
                 <div class="loginBox">
                     <img src="{{asset('/images/assets/user.png')}}" alt="user" class="user">
                     <h2>CHANGE PASSWORD</h2>

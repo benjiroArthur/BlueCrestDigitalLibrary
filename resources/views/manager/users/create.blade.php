@@ -36,9 +36,9 @@
 
                     {{ csrf_field() }}
 
-                    <div class="row">
+                    <div class="row justify-content-center">
 
-                        <div class="col-lg-4 offset-4">
+                        <div class="col-md-4 formBox">
                             <div class="p-20">
 
 
