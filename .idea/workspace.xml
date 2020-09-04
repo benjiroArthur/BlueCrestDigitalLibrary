@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56ee258e-861f-4835-87ac-fb64a4eec152" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,7 +200,9 @@
       <workItem from="1595789934508" duration="2982000" />
       <workItem from="1595887513896" duration="2229000" />
       <workItem from="1596230909868" duration="1218000" />
-      <workItem from="1596279278533" duration="21356000" />
+      <workItem from="1596279278533" duration="22688000" />
+      <workItem from="1599078659451" duration="2360000" />
+      <workItem from="1599261649481" duration="680000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1595175334986</created>
@@ -237,7 +239,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596530506513</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="book page error fixed">
+      <created>1596567548103</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1596567548103</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,33 +258,34 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="update" />
     <MESSAGE value="Faculty and Department Updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Faculty and Department Updates" />
+    <MESSAGE value="book page error fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="book page error fixed" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="425" y="0" key="CommitChangelistDialog2" timestamp="1596530499655">
+    <state x="425" y="0" key="CommitChangelistDialog2" timestamp="1596567546202">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state x="425" y="0" key="CommitChangelistDialog2/0.0.1600.870@0.0.1600.870" timestamp="1596530499655" />
+    <state x="425" y="0" key="CommitChangelistDialog2/0.0.1600.870@0.0.1600.870" timestamp="1596567546202" />
     <state x="580" y="190" key="FileChooserDialogImpl" timestamp="1595887556039">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state x="580" y="190" key="FileChooserDialogImpl/0.0.1600.870@0.0.1600.870" timestamp="1595887556039" />
-    <state width="1557" height="219" key="GridCell.Tab.0.bottom" timestamp="1596486948063">
+    <state width="1557" height="219" key="GridCell.Tab.0.bottom" timestamp="1596743676922">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state width="1557" height="219" key="GridCell.Tab.0.bottom/0.0.1600.870@0.0.1600.870" timestamp="1596486948063" />
-    <state width="1557" height="219" key="GridCell.Tab.0.center" timestamp="1596486948062">
+    <state width="1557" height="219" key="GridCell.Tab.0.bottom/0.0.1600.870@0.0.1600.870" timestamp="1596743676922" />
+    <state width="1557" height="219" key="GridCell.Tab.0.center" timestamp="1596743676922">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state width="1557" height="219" key="GridCell.Tab.0.center/0.0.1600.870@0.0.1600.870" timestamp="1596486948062" />
-    <state width="1557" height="219" key="GridCell.Tab.0.left" timestamp="1596486948061">
+    <state width="1557" height="219" key="GridCell.Tab.0.center/0.0.1600.870@0.0.1600.870" timestamp="1596743676922" />
+    <state width="1557" height="219" key="GridCell.Tab.0.left" timestamp="1596743676921">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state width="1557" height="219" key="GridCell.Tab.0.left/0.0.1600.870@0.0.1600.870" timestamp="1596486948061" />
-    <state width="1557" height="219" key="GridCell.Tab.0.right" timestamp="1596486948062">
+    <state width="1557" height="219" key="GridCell.Tab.0.left/0.0.1600.870@0.0.1600.870" timestamp="1596743676921" />
+    <state width="1557" height="219" key="GridCell.Tab.0.right" timestamp="1596743676922">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state width="1557" height="219" key="GridCell.Tab.0.right/0.0.1600.870@0.0.1600.870" timestamp="1596486948062" />
+    <state width="1557" height="219" key="GridCell.Tab.0.right/0.0.1600.870@0.0.1600.870" timestamp="1596743676922" />
     <state x="392" y="164" key="Vcs.Push.Dialog.v2" timestamp="1596359905722">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
